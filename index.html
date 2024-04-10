@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Calculator</title>
+  <style>
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: white;
+      color: whitesmoke;
+      font-family: sans-serif;
+      display: grid;
+      place-content: center;
+      height: 100vh;
+    }
+
+    h1 {
+      color: orangered;
+      font-size: 3rem;
+      border-bottom: 1px solid gray;
+      margin-bottom: 30px;
+    }
+
+    .outline {
+      background-color: #404040;
+      border: 1px solid #404040;
+      width: 300px;
+      padding: 20px;
+      border-radius: 8px;
+    }
+
+    .display {
+      color: whitesmoke;
+      background-color: transparent;
+      border: 2px solid gray;
+      border-radius: 4px;
+      width: 100%;
+      height: 50px;
+      font-size: 25px;
+      font-weight: bold;
+      padding: 0 10px;
+      text-align: right;
+      outline: none;
+    }
+
+    .buttons {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      justify-items: center;
+      gap: 2px;
+      margin-top: 20px;
+    }
+
+    button {
+      width: 100%;
+      height: 50px;
+      color: whitesmoke;
+      background-color: transparent;
+      border-radius: 4px;
+      border: 1px solid gray;
+      font-weight: 700;
+    }
+
+    .operate {
+      background-color: #7a9d54;
+    }
+
+    .ac,
+    .c,
+    .eval {
+      background-color: #e7b10a;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Calculator</h1>
+  <div class="outline">
+    <input type="text" id="display" value="0" class="display" readonly />
+    <div class="buttons">
+      <button class="button" type="button" id="btn7">7</button>
+      <button class="button" type="button" id="btn8">8</button>
+      <button class="button" type="button" id="btn9">9</button>
+      <button class="operate" type="button" id="btnplus">+</button>
+      <button class="button" type="button" id="btn4">4</button>
+      <button class="button" type="button" id="btn5">5</button>
+      <button class="button" type="button" id="btn6">6</button>
+      <button class="operate" type="button" id="btnminus">-</button>
+      <button class="button" type="button" id="btn1">1</button>
+      <button class="button" type="button" id="btn2">2</button>
+      <button class="button" type="button" id="btn3">3</button>
+      <button class="operate" type="button" id="btninto">*</button>
+      <button class="button" type="button" id="btn00">00</button>
+      <button class="button" type="button" id="btn0">0</button>
+      <button class="button" type="button" id="btndot">.</button>
+      <button class="operate" type="button" id="btndivide">/</button>
+      <button type="button" id="btnallclear" class="ac">AC</button>
+      <button type="button" id="btncut" class="c">C</button>
+      <button type="button" id="btneval" class="eval">=</button>
+      <button class="operate pcent" type="button" id="btnpercent">%</button>
+    </div>
+  </div>
+</body>
+
+<script>
+  var display = document.getElementById("display");
+  var buttons = document.getElementsByTagName("button");  
+        let result = "0";
+  for (var i = 0; i < buttons.length; i++) {
+    buttons[i].addEventListener("click", function () {
+    let value = this.innerHTML;
+      switch (value) {
+        case "AC":
+          display.value = "0";
+          break;
+        case "C":
+          if (display.value == "0") display.value = "0";
+          else display.value = display.value.slice(0, -1);
+          break;
+        case "=":
+          result = "1";
+          try {
+            display.value = "Result: " + eval(display.value);
+          } catch (e) {
+            display.value = "Error";
+          }
+          break;
+        default:
+            if (result == "1") {
+             result = "0";
+                display.value = "0"; 
+            }
+          if (display.value == "0") {
+            display.value = value;
+          } else {
+            display.value += value;
+          }
+        }
+    });
+  }
+</script>
+
+</html>
